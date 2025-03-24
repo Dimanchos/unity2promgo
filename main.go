@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/equelin/gounity"
@@ -24,11 +23,8 @@ func main() {
 	if exporter.Pools {
 		labels := []string{"unity", "id", "name"}
 		poolFields := []string{"sizefree", "sizeTotal", "sizeUsed", "sizeSubscribed"}
-		for _, field := range poolFields {
-			poolMetric := prometheus.NewGaugeVec(
-				prometheus.GaugeOpts{
-					//Namespace: "our_company",
-					//Subsystem: "blob_storage",
+		for _, field :=
+		"blob_storage",
 					Name: "pool_" + field + "_" + "bytes",
 					Help: "Bytes of pool " + field,
 				},
@@ -125,5 +121,5 @@ func main() {
 	}()
 
 	http.Handle("/metrics", promhttp.HandlerFor(reg, promhttp.HandlerOpts{}))
-	log.Fatal(http.ListenAndServe(strconv.Itoa(exporter.Port), nil))
+	log.Fatal(http.ListenAndServe((exporter.Port), nil))
 }
